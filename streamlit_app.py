@@ -11,13 +11,13 @@ uploaded_file = st.file_uploader('Insert An Image', type=['jpg', 'jpeg', 'png'])
 
 if uploaded_file is not None:
 
-    img = Image.open(uploaded_file)
+    img = Image.open(uploaded_file).convert('RGB')
     img = cv2.resize(np.array(img), (900, 620))
     st.image(img)
 
     if st.button('Detect'):
 
-        results = model(img , conf=0.01)
+        results = model(img , conf=0.25)
         r = results[0]
         annotated = r.plot()
 
